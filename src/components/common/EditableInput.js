@@ -31,7 +31,8 @@ export class EditableInput extends (PureComponent || Component) {
       this.props.value !== this.state.value &&
       (prevProps.value !== this.props.value || prevState.value !== this.state.value)
     ) {
-      if (this.input === document.activeElement) {
+      const inputDocument = this.input.ownerDocument; // InCase we portal our component into an iFrame
+      if (this.input === inputDocument.activeElement) {
         this.setState({ blurValue: String(this.props.value).toUpperCase() })
       } else {
         this.setState({ value: String(this.props.value).toUpperCase(), blurValue: !this.state.blurValue && String(this.props.value).toUpperCase() })
